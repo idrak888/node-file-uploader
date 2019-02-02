@@ -6,6 +6,7 @@ const {mongoose} = require('./db/mongoose');
 const {Image} = require('./db/images');
 
 var app = express();
+app.use(express.static('./public'));
 
 var port = process.env.PORT || 3000;
 
