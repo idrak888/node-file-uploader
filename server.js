@@ -44,6 +44,12 @@ app.get('/uploads', (req, res) => {
 	});
 });
 
+app.delete('/uploads', (req, res) => {
+	Image.find().remove().then(doc => {
+		res.send(doc);
+	});	
+});
+
 app.listen(port, () => {
 	console.log('Started on port ' + port);
 });
