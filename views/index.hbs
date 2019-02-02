@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node file uploader</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>File upload</h1>
+		<span class="msg">{{msg}}</span>
+			<form method="POST" enctype="multipart/form-data" action="/">
+			  <div class="custom-file">
+			    <input type="file" id="customFile" name="myImage">
+			  </div>
+				<br/>
+				<button type="submit" class="btn btn-primary">Select image</button>
+				<br/>
+				<img src={{path}} class="img-fluid">
+			</form>
+	</div>
+</body>
+</html>
