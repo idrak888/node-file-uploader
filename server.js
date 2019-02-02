@@ -1,5 +1,4 @@
 const express = require('express');
-const hbs = require('handlebars');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -7,6 +6,8 @@ const {mongoose} = require('./db/mongoose');
 const {Image} = require('./db/images');
 
 var app = express();
+
+var port = process.env.PORT || 3000;
 
 const storage = multer.diskStorage({
 	destination: './public/uploads/',
@@ -22,10 +23,7 @@ const upload = multer({
 	}
 }).single('myImage');
 
-app.set('view engine', 'hbs');
-app.use(express.static('./public'));
-
-app.post('/', upload, (req, res) => {
+app.post('/upload', upload, (req, res) => {
 	console.log(req.file);
 	
 	const newImage = new Image ({
@@ -39,10 +37,12 @@ app.post('/', upload, (req, res) => {
 	});
 });
 
-app.get('/', (req, res) => {
-	res.render('index');
+app.get('/uploads', (req, res) => {
+	Image.find().then(imgs => {
+		res.send(imgs);
+	});
 });
 
-app.listen(3000, () => {
-	console.log('Started on port 3000');
+app.listen(port, () => {
+	console.log('Started on port ' + port);
 });
